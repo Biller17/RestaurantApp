@@ -1,3 +1,2 @@
-dependencies: \
-  /Users/biller/GitHub/RestaurantApp/RestaurantApp/ios/RestaurantApp/main.m \
-  /Users/biller/GitHub/RestaurantApp/RestaurantApp/ios/RestaurantApp/AppDelegate.h
+dependencies: /Users/biller/GitHub/RestaurantApp/ios/RestaurantApp/main.m \
+  /Users/biller/GitHub/RestaurantApp/ios/RestaurantApp/AppDelegate.h

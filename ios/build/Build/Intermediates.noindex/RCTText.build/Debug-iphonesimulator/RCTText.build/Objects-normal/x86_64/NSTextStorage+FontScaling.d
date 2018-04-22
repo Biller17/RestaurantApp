@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/biller/GitHub/RestaurantApp/RestaurantApp/node_modules/react-native/Libraries/Text/Text/NSTextStorage+FontScaling.m \
-  /Users/biller/GitHub/RestaurantApp/RestaurantApp/node_modules/react-native/Libraries/Text/Text/NSTextStorage+FontScaling.h
+  /Users/biller/GitHub/RestaurantApp/node_modules/react-native/Libraries/Text/Text/NSTextStorage+FontScaling.m \
+  /Users/biller/GitHub/RestaurantApp/node_modules/react-native/Libraries/Text/Text/NSTextStorage+FontScaling.h
