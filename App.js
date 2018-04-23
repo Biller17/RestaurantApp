@@ -10,6 +10,7 @@ import {
 
 import Login from './src/components/Login/Login'
 import Navigation from './src/components/Navigation'
+import NewProduct from './src/components/Almacen/NewProduct'
 
 import {Scene, Router} from 'react-native-router-flux';
 
@@ -25,6 +26,7 @@ export default class App extends Component<{}> {
       <Scene key="Root">
         <Scene key="login" component={Login} hideNavBar/>
         <Scene key="nav" component={Navigation} hideNavBar/>
+        <Scene key="newProduct" component={NewProduct} hideNavBar/>
       </Scene>
     </Router>
   }

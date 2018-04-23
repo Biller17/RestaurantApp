@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Actions} from "react-native-router-flux";
 
 export default class Almacen extends Component {
+  newProduct(){
+    Actions.newProduct();
+  }
   render() {
     return (
       <KeyboardAvoidingView benhavior="padding" style={styles.container}>
@@ -10,7 +14,7 @@ export default class Almacen extends Component {
           <View style={styles.logoContainer}>
             <Text style={styles.title}>Almacen</Text>
           </View>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity onPress={()=> {this.newProduct()}}style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Nuevo producto</Text>
           </TouchableOpacity>
       </View>
