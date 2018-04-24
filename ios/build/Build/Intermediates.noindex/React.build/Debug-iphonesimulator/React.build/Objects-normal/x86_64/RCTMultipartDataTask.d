@@ -1,4 +1,4 @@
 dependencies: \
-  /Users/biller/GitHub/RestaurantApp/node_modules/react-native/React/Base/RCTMultipartDataTask.m \
-  /Users/biller/GitHub/RestaurantApp/node_modules/react-native/React/Base/RCTMultipartDataTask.h \
-  /Users/biller/GitHub/RestaurantApp/node_modules/react-native/React/Base/RCTMultipartStreamReader.h
+  /Users/edgargarcia/Documents/GitHub/RestaurantApp/node_modules/react-native/React/Base/RCTMultipartDataTask.m \
+  /Users/edgargarcia/Documents/GitHub/RestaurantApp/node_modules/react-native/React/Base/RCTMultipartDataTask.h \
+  /Users/edgargarcia/Documents/GitHub/RestaurantApp/node_modules/react-native/React/Base/RCTMultipartStreamReader.h
