@@ -28,6 +28,47 @@
 		<data>
 		SyvObHkkk6SlcWtv7C2+/olJLD8=
 		</data>
+		<key>Frameworks/IDEBundleInjection.framework/IDEBundleInjection</key>
+		<data>
+		ooz0sIAaLKBGoFU5iKq8DR11NmY=
+		</data>
+		<key>Frameworks/IDEBundleInjection.framework/Info.plist</key>
+		<data>
+		R/knOPjsjrJNiVtUa2S4kYE749M=
+		</data>
+		<key>Frameworks/IDEBundleInjection.framework/_CodeSignature/CodeResources</key>
+		<data>
+		qcVgsOCxIzxwcNXLWXgRrNjnuT8=
+		</data>
+		<key>Frameworks/IDEBundleInjection.framework/version.plist</key>
+		<data>
+		K7jOt4uC+lqy/StneXlQVk21axY=
+		</data>
+		<key>Frameworks/XCTest.framework/Info.plist</key>
+		<data>
+		CYfyvPIGUR84QvCD7SuNDvG6Bxc=
+		</data>
+		<key>Frameworks/XCTest.framework/XCTest</key>
+		<data>
+		M3EBma1BpAxt7iGIjYcrm9BnNOc=
+		</data>
+		<key>Frameworks/XCTest.framework/_CodeSignature/CodeResources</key>
+		<data>
+		5EUn1qFgVTwSkfSLCubcLwgrx0c=
+		</data>
+		<key>Frameworks/XCTest.framework/en.lproj/InfoPlist.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			TuBj57ZP6zBqcL9HttO2Rucaw9E=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Frameworks/XCTest.framework/version.plist</key>
+		<data>
+		Etc/8BPenX54rv1uBx24u4bnqTg=
+		</data>
 		<key>Info.plist</key>
 		<data>
 		I66OVDuP04AULOe/EcQP3u/ZPCs=
@@ -51,6 +92,26 @@
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>PlugIns/RestaurantAppTests.xctest.dSYM/Contents/Info.plist</key>
+		<data>
+		7Xifd2o0LZcHxdAUCk7bayKEp58=
+		</data>
+		<key>PlugIns/RestaurantAppTests.xctest.dSYM/Contents/Resources/DWARF/RestaurantAppTests</key>
+		<data>
+		4Kys9hxPPU2yCF95VXM+L8XiQyI=
+		</data>
+		<key>PlugIns/RestaurantAppTests.xctest/Info.plist</key>
+		<data>
+		VtQJ1WG6ngKZYwaeCUOnRXswie0=
+		</data>
+		<key>PlugIns/RestaurantAppTests.xctest/RestaurantAppTests</key>
+		<data>
+		4iIrqRTOHpWAcw8qIVapb1Nf5y4=
+		</data>
+		<key>PlugIns/RestaurantAppTests.xctest/_CodeSignature/CodeResources</key>
+		<data>
+		lel/HWLwFeaBblyj9rTmcnHJ5cU=
 		</data>
 		<key>SimpleLineIcons.ttf</key>
 		<data>
@@ -129,6 +190,107 @@
 			fh3QPdTOkLZYBSVUzXRZ3xZxZxc4mlUvpMbVal+JM+Y=
 			</data>
 		</dict>
+		<key>Frameworks/IDEBundleInjection.framework/IDEBundleInjection</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ooz0sIAaLKBGoFU5iKq8DR11NmY=
+			</data>
+			<key>hash2</key>
+			<data>
+			QTZkTlnemyTcrFMb3v3GdQcfmpRodaOjtevd5TjxiiY=
+			</data>
+		</dict>
+		<key>Frameworks/IDEBundleInjection.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			R/knOPjsjrJNiVtUa2S4kYE749M=
+			</data>
+			<key>hash2</key>
+			<data>
+			wLDjbULmM78l0rN5jh2/yPax234qVZL29OQBQmdYmOU=
+			</data>
+		</dict>
+		<key>Frameworks/IDEBundleInjection.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			qcVgsOCxIzxwcNXLWXgRrNjnuT8=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZARlo4LD/z4nYhaCEocjb6nPjuZDCrLsQzn0n4GVr3s=
+			</data>
+		</dict>
+		<key>Frameworks/IDEBundleInjection.framework/version.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			K7jOt4uC+lqy/StneXlQVk21axY=
+			</data>
+			<key>hash2</key>
+			<data>
+			VzM0aDQjkmLy+IyPasdn9DeGkOOTuNMbKUMz+3efAaU=
+			</data>
+		</dict>
+		<key>Frameworks/XCTest.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CYfyvPIGUR84QvCD7SuNDvG6Bxc=
+			</data>
+			<key>hash2</key>
+			<data>
+			Xsgm2dBly62EneiB04ryti89smi53XIXAOtYLFyW4ZE=
+			</data>
+		</dict>
+		<key>Frameworks/XCTest.framework/XCTest</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			M3EBma1BpAxt7iGIjYcrm9BnNOc=
+			</data>
+			<key>hash2</key>
+			<data>
+			qAlGOWS6ltLA/WrYd4Rz6EHPivttCiNu41NTW7ulBAI=
+			</data>
+		</dict>
+		<key>Frameworks/XCTest.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5EUn1qFgVTwSkfSLCubcLwgrx0c=
+			</data>
+			<key>hash2</key>
+			<data>
+			55ZdMLgNGz7Q67XNAv/M4f4uXy0R2d5+tlHRhlkL8t4=
+			</data>
+		</dict>
+		<key>Frameworks/XCTest.framework/en.lproj/InfoPlist.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			TuBj57ZP6zBqcL9HttO2Rucaw9E=
+			</data>
+			<key>hash2</key>
+			<data>
+			89RGkjZaKuewYnjpzwhIswhqfrU8+pcEXqM/DHVrUmo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>Frameworks/XCTest.framework/version.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Etc/8BPenX54rv1uBx24u4bnqTg=
+			</data>
+			<key>hash2</key>
+			<data>
+			Jh5i9giCFfo5GhN25CjMKdDJ6Kdlz/p4L95RITR+WeA=
+			</data>
+		</dict>
 		<key>Ionicons.ttf</key>
 		<dict>
 			<key>hash</key>
@@ -171,6 +333,61 @@
 			<key>hash2</key>
 			<data>
 			NC9CWcIUkNdDyFv9XLIgM5voHcU7RU+sU2mnqmpBMI4=
+			</data>
+		</dict>
+		<key>PlugIns/RestaurantAppTests.xctest.dSYM/Contents/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			7Xifd2o0LZcHxdAUCk7bayKEp58=
+			</data>
+			<key>hash2</key>
+			<data>
+			m44cj7Z96uYPIa3JD3FXgMvvfStQH9eQVHpDknYJ2bs=
+			</data>
+		</dict>
+		<key>PlugIns/RestaurantAppTests.xctest.dSYM/Contents/Resources/DWARF/RestaurantAppTests</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4Kys9hxPPU2yCF95VXM+L8XiQyI=
+			</data>
+			<key>hash2</key>
+			<data>
+			TYeFTSM5vdaXigxa8eGxClHJmYSvWVnAZfA+CEywaw0=
+			</data>
+		</dict>
+		<key>PlugIns/RestaurantAppTests.xctest/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VtQJ1WG6ngKZYwaeCUOnRXswie0=
+			</data>
+			<key>hash2</key>
+			<data>
+			1xzDCzpPdECEQ098f68pC6el2g7kbvhtIrf8gUOb/LM=
+			</data>
+		</dict>
+		<key>PlugIns/RestaurantAppTests.xctest/RestaurantAppTests</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4iIrqRTOHpWAcw8qIVapb1Nf5y4=
+			</data>
+			<key>hash2</key>
+			<data>
+			fgxoSbr5U1rl/IqEpqhPKm+iwYprnpgHJWSbg6qFqDs=
+			</data>
+		</dict>
+		<key>PlugIns/RestaurantAppTests.xctest/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lel/HWLwFeaBblyj9rTmcnHJ5cU=
+			</data>
+			<key>hash2</key>
+			<data>
+			zGPzK56QmoGM5apglmine6bM2ro04i6nt2CEtf7Rjsc=
 			</data>
 		</dict>
 		<key>SimpleLineIcons.ttf</key>
