@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 
-export default class NewProduct extends Component {
+export default class NewDish extends Component {
   newProduct(){
     Actions.pop();
   }
@@ -11,7 +11,7 @@ export default class NewProduct extends Component {
       <KeyboardAvoidingView benhavior="padding" style={styles.container}>
         <View style={styles.container}>
           <View style={styles.logoContainer}>
-            <Text style={styles.title}>Crear Producto</Text>
+            <Text style={styles.title}>Crear nuevo platillo</Text>
           </View>
           <View style={styles.inputContainer}>
             <TextInput

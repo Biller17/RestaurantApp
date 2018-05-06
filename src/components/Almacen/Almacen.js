@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
+import Card from '../Common/Card';
 
 export default class Almacen extends Component {
   newProduct(){
-    Actions.newProduct();
+    Actions.newRaw();
   }
   render() {
     return (
       <KeyboardAvoidingView benhavior="padding" style={styles.container}>
         <View style={styles.container}>
-          <View style={styles.logoContainer}>
-            <Text style={styles.title}>Almacen</Text>
-          </View>
+          <ScrollView>
+            <View style={styles.logoContainer}>
+              <Text style={styles.title}>Almacen</Text>
+            </View>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+          </ScrollView>
           <TouchableOpacity onPress={()=> {this.newProduct()}}style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>Nuevo producto</Text>
+            <Text style={styles.buttonText}>Nueva materia prima</Text>
           </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

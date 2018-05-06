@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Actions} from "react-native-router-flux";
 
 export default class Platillos extends Component {
+  newProduct(){
+    Actions.newDish();
+  }
   render() {
     return (
       <KeyboardAvoidingView benhavior="padding" style={styles.container}>
         <View style={styles.container}>
           <View style={styles.logoContainer}>
-            <Text style={styles.title}>Platillos</Text>
+            <Text style={styles.title}>Almacen</Text>
           </View>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity onPress={()=> {this.newProduct()}}style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Nuevo platillo</Text>
           </TouchableOpacity>
       </View>
