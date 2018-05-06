@@ -5,8 +5,8 @@ import {Actions} from "react-native-router-flux";
 
 export default class Card extends Component {
   detail(){
-    // Actions.newRecipe();
-    console.warn("card pressed");
+    Actions.rawDetail();
+    // console.warn("card pressed");
   }
   render() {
     return (
