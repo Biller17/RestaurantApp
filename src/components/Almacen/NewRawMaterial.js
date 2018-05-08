@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { Text, TextInput, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
+import {addRawMaterial} from '../API/APICommunication.js';
+import {Actions} from "react-native-router-flux";
 
 export default class NewRawMaterial extends Component {
   newProduct(){
+    console.warn(this.state);
+    addRawMaterial(this.state, "none");
     Actions.pop();
   }
   render() {
@@ -20,6 +24,7 @@ export default class NewRawMaterial extends Component {
               //Control de botones una ves se complete el campo
               returnKeyType="next"
               onSubmitEditing={()=>this.passwordInput.focus()}
+              onChangeText={(name) => this.setState({name})}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
@@ -31,6 +36,7 @@ export default class NewRawMaterial extends Component {
               //Control de botones una ves se complete el campo
               returnKeyType="next"
               onSubmitEditing={()=>this.passwordInput.focus()}
+              onChangeText={(name) => this.setState({name})}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
@@ -42,6 +48,7 @@ export default class NewRawMaterial extends Component {
               //Control de botones una ves se complete el campo
               returnKeyType="next"
               onSubmitEditing={()=>this.passwordInput.focus()}
+              onChangeText={(cost) => this.setState({cost})}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
@@ -53,6 +60,7 @@ export default class NewRawMaterial extends Component {
               //Control de botones una ves se complete el campo
               returnKeyType="next"
               onSubmitEditing={()=>this.passwordInput.focus()}
+              onChangeText={(name) => this.setState({name})}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
@@ -64,13 +72,14 @@ export default class NewRawMaterial extends Component {
               //Control de botones una ves se complete el campo
               returnKeyType="next"
               onSubmitEditing={()=>this.passwordInput.focus()}
+              onChangeText={(category) => this.setState({category})}
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
               style={styles.input}
             />
           </View>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity onPress={() => this.newProduct()}style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Crear</Text>
           </TouchableOpacity>
       </View>

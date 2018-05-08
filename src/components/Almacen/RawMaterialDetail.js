@@ -2,10 +2,31 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
-import Card from '../Common/Card';
+import Card from './RawMaterialCard';
+import {deleteRawMaterial} from '../API/APICommunication.js';
 
 export default class RawMaterialDetail extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      name:this.props.data.name,
+      category: this.props.data.category,
+      cost: this.props.data.cost,
+      id: this.props.data.id
+    };
+  }
+  //
+  // componentDidMount(){
+  //   console.warn(this.props.data);
+  // }
+
   newProduct(){
+    Actions.pop();
+  }
+
+  deleteItem(){
+    deleteRawMaterial(this.state.id, 'none');
     Actions.pop();
   }
   render() {
@@ -14,16 +35,20 @@ export default class RawMaterialDetail extends Component {
         <View style={styles.container}>
           <ScrollView>
             <View style={styles.detailContainer}>
-              <Text style={styles.title}>Producto</Text>
+              <Text style={styles.title}>{this.state.name}</Text>
 
               <Image style={styles.image}source={require('../../Images/placeholder.jpg')}/>
-              <Text style={styles.textDetail}>Detalle del producto</Text>
-              <Text style={styles.textDetailSec}>Detalle del producto secundario</Text>
+              {/* {<Text style={styles.textDetail}>{this.state.name}</Text>} */}
+              <Text style={styles.textDetailSec}>Categoria: {this.state.category}</Text>
+              <Text style={styles.textDetailSec}>Costo: {this.state.cost}</Text>
             </View>
           </ScrollView>
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={()=> {this.newProduct()}}style={styles.button}>
               <Text style={styles.buttonText}>Regresar a la lista</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=> {this.deleteItem()}}style={styles.buttonDelete}>
+              <Text style={styles.buttonText}>Borrar</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -62,6 +87,11 @@ const styles = StyleSheet.create({
     button:{
       flex:1,
       backgroundColor: '#2980b9',
+      paddingVertical: 10
+    },
+    buttonDelete:{
+      flex:1,
+      backgroundColor: '#b84141',
       paddingVertical: 10
     },
     buttonContainer:{

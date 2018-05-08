@@ -27,13 +27,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#3498db'
     },
     logoContainer:{
+      height: '1%',
+      width: '1%',
       alignItems: 'center',
       flexGrow: 1,
       justifyContent: 'center'
     },
     logo:{
-      width: 100,
-      height: 1000
+      width: 20,
+      height: 20
     },
     title:{
       color:'#FFF',

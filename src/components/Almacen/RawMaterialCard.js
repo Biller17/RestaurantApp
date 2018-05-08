@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity }
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
 
-export default class Card extends Component {
+export default class RawMaterialCard extends Component {
   constructor(props){
     super(props);
     this.state = {
