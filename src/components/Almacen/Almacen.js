@@ -1,12 +1,57 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
 import Card from '../Common/Card';
+import {getRawMaterials} from '../API/APICommunication.js';
 
 export default class Almacen extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      items: []
+    };
+  }
   newProduct(){
     Actions.newRaw();
+  }
+
+  // getData(){
+  //   const data = getRawMaterials();
+  //   if(data){
+  //     this.setState({
+  //       materials: data.items
+  //     })
+  //   }
+  //   console.warn(data);
+  // }
+
+
+  componentWillMount(){
+    let callback = function updateState(data){
+      this.setState({
+        items: data
+      });
+    }.bind(this);
+    getRawMaterials(callback, "none");
+  }
+
+  renderItems(){
+    if(this.state.items != []){
+      return(
+        <View>
+          <FlatList
+            data = {this.state.items}
+            renderItem={({item}) => (
+              <Card
+                data = {item}
+              />
+            )}
+          />
+        </View>
+      )
+    }
   }
   render() {
     return (
@@ -16,13 +61,7 @@ export default class Almacen extends Component {
             <View style={styles.logoContainer}>
               <Text style={styles.title}>Almacen</Text>
             </View>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+            {this.renderItems()}
           </ScrollView>
           <TouchableOpacity onPress={()=> {this.newProduct()}}style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Nueva materia prima</Text>

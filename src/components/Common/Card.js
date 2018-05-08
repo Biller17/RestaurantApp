@@ -4,6 +4,16 @@ import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
 
 export default class Card extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      name:this.props.data.name,
+      category: this.props.data.category,
+      cost: this.props.data.cost,
+      id: this.props.data.id
+    };
+  }
+
   detail(){
     Actions.rawDetail();
     // console.warn("card pressed");
@@ -14,7 +24,11 @@ export default class Card extends Component {
         <View style={styles.imageContainer}>
           <Image style={styles.image}source={require('../../Images/placeholder.jpg')}/>
         </View>
-          <Text style={styles.title}>Producto</Text>
+        <View style={styles.detailContainer}>
+          <Text style={styles.title}>{this.state.name}</Text>
+          <Text style={styles.details}>Categoria: {this.state.category}</Text>
+          <Text style={styles.details}>Costo: {this.state.cost}</Text>
+        </View>
       </TouchableOpacity>
   );
   }
@@ -37,6 +51,11 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       opacity: 0.9
     },
+    details:{
+      color:'#FFF',
+      fontSize: 14,
+      opacity: 0.8
+    },
     buttonContainer:{
       backgroundColor: '#2980b9',
       paddingVertical: 10
@@ -58,5 +77,8 @@ const styles = StyleSheet.create({
       borderTopLeftRadius: 15,
       overflow: "hidden",
       marginRight: '15%',
+    },
+    detailContainer:{
+      flexDirection: 'column',
     }
 });
