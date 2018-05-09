@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import { StackNavigator } from "react-navigation";
+import {registerUser} from '../API/APICommunication.js';
 
 export default class Register extends Component {
   constructor(props) {
@@ -32,14 +33,17 @@ export default class Register extends Component {
   };
 
   async onRegisterPress() {
-    const { email, password, name } = this.state;
-    console.log(email);
-    console.log(name);
-    console.log(password);
-    await AsyncStorage.setItem("email", email);
-    await AsyncStorage.setItem("name", name);
-    await AsyncStorage.setItem("password", password);
-    this.props.navigation.navigate("Boiler");
+    const { name, email, password } = this.state;
+
+    let callback = function setToken(token){
+      try {
+        AsyncStorage.setItem('userToken', token);
+      } catch (error) {
+        console.warn("error al guardar el token");
+      }
+      Actions.nav();
+    }.bind(this)
+    registerUser(name, email, password, callback);
   }
 
   renderError(){
@@ -47,6 +51,17 @@ export default class Register extends Component {
       return(
         <View>
           <Text style={styles.error}>Passwords don't match</Text>
+        </View>
+      )
+    }
+  }
+
+  renderEmailError(){
+    let email = this.state.email
+    if(email != '' && email.includes('@')== false){
+      return(
+        <View>
+          <Text style={styles.error}>Enter a valid email</Text>
         </View>
       )
     }
@@ -69,6 +84,7 @@ export default class Register extends Component {
             onSubmitEditing={() => this.emailInput.focus()}
           />
           <Text style={styles.inputTitle}>Email</Text>
+          {this.renderEmailError()}
           <TextInput
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
@@ -98,6 +114,7 @@ export default class Register extends Component {
             style={styles.input}
             placeholder="Confirm Password"
             secureTextEntry={true}
+            placeholderTextColor="rgba(255,255,255,0.7)"
             returnKeyType="go"
             secureTextEntry
           />
@@ -173,7 +190,7 @@ const styles = StyleSheet.create({
   },
   error:{
     fontSize: 20,
-    color:'#c43a3a',
+    color:'#ed2222',
     textAlign:'center',
 
   }

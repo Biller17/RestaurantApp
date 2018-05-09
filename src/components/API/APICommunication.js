@@ -142,8 +142,8 @@ function registerUser(username, email, password, callback){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    console.warn(data);
-    // callback(data.token)
+    // console.warn(data);
+    callback(data.token)
   })
 }
 
