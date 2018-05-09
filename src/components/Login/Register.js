@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
-  AsyncStorage
+  AsyncStorage,
+  AlertIOS
 } from "react-native";
 
 import { StackNavigator } from "react-navigation";
@@ -34,14 +35,38 @@ export default class Register extends Component {
 
   async onRegisterPress() {
     const { name, email, password } = this.state;
-
+    if(email == "" || name == "" || password == ""){
+      AlertIOS.alert(
+        'Please fill all the fields',
+      );
+      return 0;
+    }
+    if(email.includes('@') == false){
+      AlertIOS.alert(
+        'Add a valid email',
+      );
+    }
+    if(password != this.state.password_confirmation){
+      AlertIOS.alert(
+        'The passwords dont match',
+      );
+    }
     let callback = function setToken(token){
-      try {
-        AsyncStorage.setItem('userToken', token);
-      } catch (error) {
-        console.warn("error al guardar el token");
+      if(token.true){
+        try {
+          AsyncStorage.setItem('userToken', token.token);
+        } catch (error) {
+          console.warn("error al guardar el token");
+        }
+        Actions.nav();
       }
-      Actions.nav();
+      else{
+        AlertIOS.alert(
+          'No se pudo crear el usuario',
+          'por favor intenta de nuevo mas tarde'
+        );
+      }
+
     }.bind(this)
     registerUser(name, email, password, callback);
   }
@@ -121,7 +146,7 @@ export default class Register extends Component {
           {this.renderError()}
         </KeyboardAvoidingView>
         <View style={{flexDirection:'row'}}>
-          <TouchableOpacity style={styles.button} onPress={() => this.register()}>
+          <TouchableOpacity style={styles.button} onPress={() => this.onRegisterPress()}>
             <Text
               style={styles.buttonText}
               title="Sign up"

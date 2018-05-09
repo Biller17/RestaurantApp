@@ -124,7 +124,7 @@ function isLoggedIn(token, action){
 
 
 function registerUser(username, email, password, callback){
-  const url = 'http://104.236.192.53/restaurantapi/login';
+  const url = 'http://104.236.192.53/restaurantapi/register';
   const user = {
       username: username,
       password: password,
@@ -143,7 +143,7 @@ function registerUser(username, email, password, callback){
   .then((resp) => resp.json())
   .then(function(data){
     // console.warn(data);
-    callback(data.token)
+    callback(data)
   })
 }
 
