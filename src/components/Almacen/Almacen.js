@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
-import Card from '../Common/Card';
+import Card from './RawMaterialCard';
 import {getRawMaterials} from '../API/APICommunication.js';
 
 export default class Almacen extends Component {
@@ -38,7 +38,7 @@ export default class Almacen extends Component {
   }
 
   renderItems(){
-    if(this.state.items != []){
+    if(this.state.items.length){
       return(
         <View>
           <FlatList
@@ -52,6 +52,13 @@ export default class Almacen extends Component {
         </View>
       )
     }
+    else{
+      return(
+        <View style={styles.logoContainer}>
+          <Image style={styles.logo} source={require("../../Images/foodLoader.gif")} />
+        </View>
+      );
+    }
   }
   render() {
     return (
@@ -61,7 +68,9 @@ export default class Almacen extends Component {
             <View style={styles.logoContainer}>
               <Text style={styles.title}>Almacen</Text>
             </View>
-            {this.renderItems()}
+            <View style={styles.items}>
+              {this.renderItems()}
+            </View>
           </ScrollView>
           <TouchableOpacity onPress={()=> {this.newProduct()}}style={styles.buttonContainer}>
             <Text style={styles.buttonText}>Nueva materia prima</Text>
@@ -84,8 +93,10 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     logo:{
-      width: 100,
-      height: 1000
+      marginTop: 100,
+      width: 200,
+      height: 200,
+      borderRadius: 100,
     },
     title:{
       flex:1,
@@ -103,5 +114,9 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color: '#FFFFFF',
       fontWeight: '700'
+    },
+    items:{
+      justifyContent: 'center',
+
     }
 });

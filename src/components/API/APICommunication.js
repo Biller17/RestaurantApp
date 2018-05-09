@@ -35,7 +35,7 @@ function deleteRawMaterial(id, auth){
   })
 }
 
-function addRawMaterial(obj, auth){
+function newRawMaterial(obj, auth, qty, expirationDate){
 
   const url = 'http://104.236.192.53/restaurantapi/materias-primas';
   var request = new Request(url, {
@@ -50,11 +50,29 @@ function addRawMaterial(obj, auth){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    console.warn(data);
+    console.warn("data", data);
     // callback(data.items);
+    addRawMaterial(auth, data.item.id, qty, expirationDate);
   })
+}
+
+function addRawMaterial(auth, id, qty, expirationDate){
+  const url = 'http://104.236.192.53/restaurantapi/materias-primas/hay/'+id;
+  const obj = {
+    quantity: qty,
+    expiration: expirationDate
+  };
+  var request = new Request(url, {
+      method: 'POST',
+      headers: {
+        Authorization: "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSGVucnlrIiwiaWQiOjEsImlhdCI6MTUyNTc0NTQ3Mn0.OLbyDrZSMa331KzHFdLh2oT0T8lrNIu66auqHEGCuj4",
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(obj)
+  });
+
 }
 
 
 
-export{getRawMaterials, deleteRawMaterial, addRawMaterial}
+export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial}

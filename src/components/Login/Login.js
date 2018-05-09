@@ -86,7 +86,7 @@ export default class Login extends Component {
             Sign up
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button2}>
           <Text
             style={styles.buttonText}
             onPress={() => this.props.navigation.navigate("ForgetPassword.js")}
@@ -138,6 +138,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#307db0",
+    paddingVertical: 10
+  },
+  button2: {
+    backgroundColor: "#246a99",
     paddingVertical: 10
   },
   input:{
