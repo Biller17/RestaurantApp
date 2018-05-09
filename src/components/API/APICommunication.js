@@ -36,11 +36,7 @@ function deleteRawMaterial(id, auth){
 }
 
 function addRawMaterial(obj, auth){
-  // let obj = {
-  // 	"name":"Perejil",
-  // 	"cost":"10",
-  // 	"category":"verdes"
-  // }
+
   const url = 'http://104.236.192.53/restaurantapi/materias-primas';
   var request = new Request(url, {
       method: 'POST',

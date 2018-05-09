@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 
 import Login from './src/components/Login/Login'
+import ForgotPassword from './src/components/Login/ForgetPassword'
+import Register from './src/components/Login/Register'
 import Navigation from './src/components/Navigation'
 import NewRawMaterial from './src/components/Almacen/NewRawMaterial'
 import NewDish from './src/components/Platillos/NewDish'
@@ -28,6 +30,8 @@ export default class App extends Component<{}> {
     return <Router>
       <Scene key="Root">
         <Scene key="login" component={Login} hideNavBar/>
+        <Scene key="register" component={Register} hideNavBar/>
+        <Scene key="noPass" component={ForgotPassword} hideNavBar/>
         <Scene key="nav" component={Navigation} hideNavBar/>
         <Scene key="newRaw" component={NewRawMaterial} hideNavBar/>
         <Scene key="newDish" component={NewDish} hideNavBar/>
