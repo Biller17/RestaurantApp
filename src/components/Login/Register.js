@@ -5,7 +5,7 @@ import {
   Text,
   View,
   TextInput,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
   KeyboardAvoidingView,
   AsyncStorage
@@ -42,23 +42,33 @@ export default class Register extends Component {
     this.props.navigation.navigate("Boiler");
   }
 
+  renderError(){
+    if(this.state.password != this.state.password_confirmation){
+      return(
+        <View>
+          <Text style={styles.error}>Passwords don't match</Text>
+        </View>
+      )
+    }
+  }
+
   render() {
     return (
-      <View behavior="padding" style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={require("../../Images/logoRestaurante.png")} />
-          <Text style={styles.subtext}>Sign Up:</Text>
-        </View>
+      <View style={styles.container}>
+        <Text style={styles.subtext}>Sign Up</Text>
+
         <KeyboardAvoidingView>
+          <Text style={styles.inputTitle}>Name</Text>
           <TextInput
             value={this.state.name}
             onChangeText={name => this.setState({ name })}
             style={styles.input}
-            placeholder="Name"
+            placeholder="John Doe"
             placeholderTextColor="rgba(255,255,255,0.7)"
             returnKeyType="next"
             onSubmitEditing={() => this.emailInput.focus()}
           />
+          <Text style={styles.inputTitle}>Email</Text>
           <TextInput
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
@@ -70,38 +80,39 @@ export default class Register extends Component {
             keyboardType="email-address"
             autoCapitalize="none"
             autoCorrect={false}
-            placeholder="Email"
+            placeholder="johnny@falsemail.com"
           />
+          <Text style={styles.inputTitle}>Password</Text>
           <TextInput
-            value={this.state.password}
             onChangeText={password => this.setState({ password })}
             style={styles.input}
             placeholder="Password"
             secureTextEntry={true}
             placeholderTextColor="rgba(255,255,255,0.7)"
-            ref={input => (this.passwordCInput = input)}
             onSubmitEditing={() => this.passwordInput.focus()}
             returnKeyType="next"
             secureTextEntry
           />
           <TextInput
-            value={this.state.password}
             onChangeText={password_confirmation => this.setState({ password_confirmation })}
             style={styles.input}
             placeholder="Confirm Password"
             secureTextEntry={true}
-            placeholderTextColor="rgba(255,255,255,0.7)"
             returnKeyType="go"
             secureTextEntry
-            ref={input => (this.passwordInput = input)}
           />
+          {this.renderError()}
         </KeyboardAvoidingView>
-        <TouchableHighlight
-          onPress={this.onRegisterPress.bind(this)}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableHighlight>
+        <View style={{flexDirection:'row'}}>
+          <TouchableOpacity style={styles.button} onPress={() => this.register()}>
+            <Text
+              style={styles.buttonText}
+              title="Sign up"
+            >
+              Sign up
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -109,7 +120,7 @@ export default class Register extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1.2,
+    flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#16a085",
@@ -124,7 +135,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 200,
-    height: 150
+    height: 200
   },
   input: {
     height: 40,
@@ -134,21 +145,16 @@ const styles = StyleSheet.create({
     color: "#fff",
     paddingHorizontal: 10
   },
-  button: {
-    height: 50,
-    backgroundColor: "rgba(255,255,255,0.2)",
-    alignSelf: "stretch",
-    marginTop: 10,
-    justifyContent: "center",
-    paddingVertical: 15,
-    marginBottom: 10
-  },
   buttonText: {
-    fontSize: 18,
-    alignSelf: "center",
     textAlign: "center",
     color: "#FFF",
     fontWeight: "700"
+  },
+  button: {
+    flex:1,
+    backgroundColor: "#0c8358",
+    paddingVertical: 10,
+    marginTop: 50
   },
   subtext: {
     color: "#ffffff",
@@ -156,7 +162,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 35,
     fontWeight: "bold",
-    marginTop: 20
+    marginTop: 20,
+    marginBottom: 40
+  },
+  inputTitle:{
+    color:'#FFF',
+    fontSize: 18,
+    marginBottom: 15,
+    opacity: 0.9
+  },
+  error:{
+    fontSize: 20,
+    color:'#c43a3a',
+    textAlign:'center',
+
   }
 });
 

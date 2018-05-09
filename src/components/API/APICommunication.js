@@ -1,6 +1,6 @@
 
 
-
+//********************************************** FUNCIONES RAW MATERIALS *******************************************
 function getRawMaterials(callback, auth){
   const url = 'http://104.236.192.53/restaurantapi/materias-primas';
   var request = new Request(url, {
@@ -73,6 +73,79 @@ function addRawMaterial(auth, id, qty, expirationDate){
 
 }
 
+//************************************************************FUNCIONES LOGIN************************************************+++
+
+function logUser(username, password, callback){
+  const url = 'http://104.236.192.53/restaurantapi/login';
+  const user = {
+      username: username,
+      password: password
+  }
+  var request = new Request(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+
+  });
+
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    callback(data.token)
+    // console.warn(data.token);
+  })
+}
+
+function isLoggedIn(token, action){
+  const url = 'http://104.236.192.53/restaurantapi/isLoggedIn';
+
+  var request = new Request(url, {
+      method: 'GET',
+      headers: {
+        Authorization: 'bearer ' +  token,
+      }
+  });
+
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    // console.warn("data",data);
+    if(data.success = true){
+      action();
+    }
+    // callback(data.token)
+    // console.warn(data.token);
+  })
+
+}
 
 
-export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial}
+
+function registerUser(username, email, password, callback){
+  const url = 'http://104.236.192.53/restaurantapi/login';
+  const user = {
+      username: username,
+      password: password,
+      email: email
+  }
+  var request = new Request(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+
+  });
+
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    console.warn(data);
+    // callback(data.token)
+  })
+}
+
+
+export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser}
