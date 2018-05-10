@@ -50,7 +50,7 @@ function newRawMaterial(obj, auth, qty, expirationDate){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    console.warn("data", data);
+    // console.warn("data", data);
     // callback(data.items);
     addRawMaterial(auth, data.item.id, qty, expirationDate);
   })

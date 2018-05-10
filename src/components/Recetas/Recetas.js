@@ -14,7 +14,7 @@ export default class Recetas extends Component {
     };
   }
   newProduct(){
-    Actions.newRaw();
+    Actions.newRecipe();
   }
 
   // getData(){
