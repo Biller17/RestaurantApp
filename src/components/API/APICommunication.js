@@ -242,7 +242,8 @@ function addIngredients(quantityList, idList, id, auth){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    console.warn(data);
+    // console.warn(data);
+    return true;
   })
 }
 
@@ -296,7 +297,7 @@ function getDishes(callback, auth){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    console.warn("data");
+    // console.warn("data");
     callback(data.items);
   })
 }
@@ -321,14 +322,31 @@ function newDish(recipe, auth, description, callback){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    console.warn(data);
+    // console.warn(data);
     callback(data);
 
   })
 }
 
 
+function deleteDish(id, auth, callback){
+  const url = 'http://104.236.192.53/restaurantapi/users/elabora/' + id;
+  var request = new Request(url, {
+      method: 'DELETE',
+      headers: {
+        Authorization: "bearer " + auth
+      }
+  });
+
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    // console.warn(data);
+    callback(data);
+    // callback(data.items);
+  })
+}
 
 
 
-export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser, getRecipes, newRecipe, deleteRecipe, getIngredients, getDishes, newDish}
+export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser, getRecipes, newRecipe, deleteRecipe, getIngredients, getDishes, newDish, deleteDish}

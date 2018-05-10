@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView, TextInput, AlertIOS, AsyncStorage } from 'react-native';
+import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView, TextInput, AlertIOS, AsyncStorage, FlatList } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
-import Card from './RawMaterialCard';
-import {deleteRawMaterial, addRawMaterial} from '../API/APICommunication.js';
+import Card from './DishCard';
+import {deleteDish, addRawMaterial, newDish} from '../API/APICommunication.js';
 
-export default class RawMaterialDetail extends Component {
+export default class DishDetail extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      name:this.props.data.name,
-      category: this.props.data.category,
-      cost: this.props.data.cost,
-      id: this.props.data.id,
-      addingMaterial: false,
-      quantity: 1,
-      expirationDate: '',
+        name: this.props.data.name,
+        elaborados: this.props.data.elaborado
     };
   }
   //
@@ -24,87 +19,92 @@ export default class RawMaterialDetail extends Component {
   //   console.warn(this.props.data);
   // }
 
+
+  orderMore(){
+    const item = {
+      id: this.props.data.recetaId
+    };
+    let callback = function returnMenu(resp){
+      if(resp.success == true){
+        AlertIOS.alert(
+          'Dish ordered succesfully',
+        );
+        Actions.pop();
+      }
+      else{
+        AlertIOS.alert(
+          'There was a problem',
+          resp.message
+        );
+        Actions.pop();
+      }
+    }.bind(this);
+    AsyncStorage.getItem('userToken').then((value) => {
+      if(value !== null){
+        newDish(item, value, "none", callback);
+      }
+    }).done();
+  }
   newProduct(){
     Actions.pop();
   }
 
   deleteItem(){
-    deleteRawMaterial(this.state.id, 'none');
-    Actions.pop();
-  }
-
-  addingMaterial(){
-    if(this.state.addingMaterial == false){
-      var isAdding = !this.state.addingMaterial;
-      this.setState({
-        addingMaterial: isAdding
-      });
-    }
-    else{
-      let date = new Date(this.state.expirationDate)
-      if(date == null){
+    let callback = function returnMenu(resp){
+      if(resp.success == true){
         AlertIOS.alert(
-          'Fecha invalida',
-          'ingrese la fecha como el formato especificado'
+          'Dish deleted succesfully',
         );
-        return 0;
+        Actions.pop();
       }
-      let milliseconds = date.getTime();
-      AsyncStorage.getItem('userToken').then((value) => {
-        if(value !== null){
-          addRawMaterial(value, this.state.id, this.state.quantity, milliseconds);
-        }
-      }).done();
-      Actions.pop();
-    }
+      else{
+        AlertIOS.alert(
+          'There was a problem',
+          resp.message
+        );
+        Actions.pop();
+      }
+    }.bind(this);
+    AsyncStorage.getItem('userToken').then((value) => {
+      if(value !== null){
+          deleteDish(this.state.id, value, callback);
+      }
+    }).done();
   }
 
-  updateQuantity(updateNum){
-    var quantity = this.state.quantity + updateNum;
-    if(quantity < 0){
-      AlertIOS.alert(
-        'Numero invalido',
-        'no puedes tener cantidad abajo de 0'
-      );
-
-    }
-    else{
-      this.setState({
-        quantity: quantity
-      });
-    }
-  }
-  renderAddMaterial(){
-    if(this.state.addingMaterial){
+  getExpDate(item){
+    var date = new Date(this.props.data.elaborado[0].expiration)
+    date = date.toString("dd mmmm YYYY").split("00:")[0];
+    if(date != null){
       return(
-        <View style={{flex:1, alignItems: 'center'}}>
-          <Text style={styles.inputTitle}>Caducidad</Text>
-          <TextInput
-            placeholder="DD/MM/AAAA"
-            placeholderTextColor="rgba(255,255,255,0.7)"
-            //Control de botones una ves se complete el campo
-            returnKeyType="next"
-            onSubmitEditing={()=>this.passwordInput.focus()}
-            onChangeText={(expirationDate) => this.setState({expirationDate})}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
-            style={styles.input}
-          />
-          <Text style={styles.inputTitle}>Cantidad</Text>
-          <View style={styles.quantityContainer}>
-            <TouchableOpacity onPress={() => this.updateQuantity(1)} style={styles.quantityButton}>
-              <Text style={styles.qtyText}>+</Text>
-            </TouchableOpacity>
-            <Text style={styles.title}>{this.state.quantity}</Text>
-            <TouchableOpacity onPress={() => this.updateQuantity(-1)}style={styles.quantityButton}>
-              <Text style={styles.qtyText}>-</Text>
-            </TouchableOpacity>
+        <Text style={styles.ingredients}>{date}</Text>
+      );
+    }
+
+  }
+
+  renderDishes(){
+
+    if(this.state.elaborados.length > 0){
+      return(
+        <View style={{flex:1, flexDirection: 'column'}}>
+          <View style={styles.container}>
+            <FlatList
+              data ={this.state.elaborados}
+              keyExtractor={(item, index) => index}
+              extraData={this.state}
+              renderItem={({item}) => (
+                <View style={{backgroundColor: '#3d7a98', flex:1, flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
+                  {this.getExpDate(item)}
+              </View>
+              )}
+            />
           </View>
         </View>
       )
     }
   }
+
   render() {
     return (
       <KeyboardAvoidingView benhavior="padding" style={styles.container}>
@@ -112,18 +112,17 @@ export default class RawMaterialDetail extends Component {
           <ScrollView>
             <View style={styles.detailContainer}>
               <Text style={styles.title}>{this.state.name}</Text>
-
               <Image style={styles.image}source={require('../../Images/placeholder.jpg')}/>
-              {/* {<Text style={styles.textDetail}>{this.state.name}</Text>} */}
-              <Text style={styles.textDetailSec}>Categoria: {this.state.category}</Text>
-              <Text style={styles.textDetailSec}>Costo: {this.state.cost}</Text>
+              <Text style={styles.textDetail}>Cooked dishes: {this.state.elaborados.length}</Text>
+              {this.renderDishes()}
+
+
             </View>
-            {this.renderAddMaterial()}
           </ScrollView>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={()=> {this.addingMaterial()}}style={styles.buttonG}>
-              <Text style={styles.buttonText}>Add material</Text>
+            <TouchableOpacity onPress={()=> {this.orderMore()}}style={styles.buttonG}>
+              <Text style={styles.buttonText}>Order more</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonContainer}>
@@ -241,5 +240,13 @@ const styles = StyleSheet.create({
       marginBottom: 10,
       marginTop: 10,
       opacity: 0.9
+    },
+    ingredients:{
+      color:'#FFF',
+      fontSize: 16,
+      marginVertical: 15,
+      marginHorizontal: 5,
+      opacity: 0.9,
+      textAlign: 'center'
     },
 });

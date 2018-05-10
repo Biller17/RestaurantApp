@@ -91,10 +91,10 @@ export default class RecipeDetail extends Component {
           </ScrollView>
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={()=> {this.newProduct()}}style={styles.button}>
-              <Text style={styles.buttonText}>Regresar a la lista</Text>
+              <Text style={styles.buttonText}>Return to list</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=> {this.deleteItem()}}style={styles.buttonDelete}>
-              <Text style={styles.buttonText}>Borrar</Text>
+              <Text style={styles.buttonText}>Delete</Text>
             </TouchableOpacity>
           </View>
       </View>

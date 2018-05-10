@@ -17,7 +17,8 @@ export default class DishCard extends Component {
   detail(){
     // Actions.rawDetail();
     // console.warn(this.props.data);
-    Actions.recipeDetail({data: this.props.data})
+    // console.warn(this.props.data);
+    Actions.dishDetail({data: this.props.data})
   }
   render() {
     // console.warn(this.props.data.elaborado);
@@ -30,8 +31,9 @@ export default class DishCard extends Component {
         </View>
         <View style={styles.detailContainer}>
           <Text style={styles.title}>{this.state.name}</Text>
-          <Text style={styles.details}>Quantity: {this.props.data.elaborado[0].quantity}</Text>
-          <Text style={styles.details}>Expiration: {date}</Text>
+          {/* <Text style={styles.details}>Quantity: {this.props.data.elaborado[0].quantity}</Text> */}
+          <Text style={styles.details}>Ordered: {this.props.data.elaborado.length}</Text>
+          {/* <Text style={styles.details}>Expiration: {date}</Text> */}
         </View>
       </TouchableOpacity>
     );
