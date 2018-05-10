@@ -71,8 +71,32 @@ function addRawMaterial(auth, id, qty, expirationDate){
       },
       body: JSON.stringify(obj)
   });
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    // console.warn("data", data);
+    return 0;
+    // callback(data.items);
 
+  })
 }
+
+function checkQuantity(id, callback, auth){
+  const url = 'http://104.236.192.53/restaurantapi/materias-primas/hay/' + id;
+  var request = new Request(url, {
+      method: 'GET',
+      headers: {
+        Authorization: "bearer " + auth
+      }
+  });
+
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    callback(data.items);
+  })
+}
+
 
 //************************************************************FUNCIONES LOGIN************************************************+++
 
