@@ -18,6 +18,7 @@ import NewRecipe from './src/components/Recetas/NewRecipe'
 import RawMaterialDetail from './src/components/Almacen/RawMaterialDetail'
 import RecipeDetail from './src/components/Recetas/RecipeDetail'
 import DishDetail from './src/components/Platillos/DishDetail'
+import User from './src/components/User/User'
 
 import {Scene, Router} from 'react-native-router-flux';
 
@@ -32,6 +33,7 @@ export default class App extends Component<{}> {
     return <Router>
       <Scene key="Root">
         <Scene key="login" component={Login} hideNavBar/>
+        <Scene key="user" component={User} hideNavBar/>
         <Scene key="register" component={Register} hideNavBar/>
         <Scene key="noPass" component={ForgotPassword} hideNavBar/>
         <Scene key="nav" component={Navigation} hideNavBar/>

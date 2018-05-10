@@ -23,7 +23,7 @@ export default class RawMaterialCard extends Component {
     return (
       <TouchableOpacity behavior="padding" style={styles.container} onPress={()=> {this.detail()}}>
         <View style={styles.imageContainer}>
-          <Image style={styles.image}source={require('../../Images/placeholder.jpg')}/>
+          <Image style={styles.image}source={require('../../Images/placeholderIngredients.png')}/>
         </View>
         <View style={styles.detailContainer}>
           <Text style={styles.title}>{this.state.name}</Text>

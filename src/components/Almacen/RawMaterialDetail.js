@@ -113,7 +113,7 @@ export default class RawMaterialDetail extends Component {
             <View style={styles.detailContainer}>
               <Text style={styles.title}>{this.state.name}</Text>
 
-              <Image style={styles.image}source={require('../../Images/placeholder.jpg')}/>
+              <Image style={styles.image}source={require('../../Images/placeholderIngredients.png')}/>
               {/* {<Text style={styles.textDetail}>{this.state.name}</Text>} */}
               <Text style={styles.textDetailSec}>Categoria: {this.state.category}</Text>
               <Text style={styles.textDetailSec}>Costo: {this.state.cost}</Text>

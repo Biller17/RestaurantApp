@@ -81,7 +81,7 @@ export default class RecipeDetail extends Component {
             <View style={styles.detailContainer}>
               <Text style={styles.title}>{this.state.name}</Text>
 
-              <Image style={styles.image}source={require('../../Images/placeholder.jpg')}/>
+              <Image style={styles.image}source={require('../../Images/placeholderRecipe.png')}/>
               {/* {<Text style={styles.textDetail}>{this.state.name}</Text>} */}
               <Text style={styles.textDetailSec}>Category: {this.state.category}</Text>
               <Text style={styles.textDetailSec}>Cost: {this.state.cost}</Text>

@@ -8,7 +8,9 @@ import {
   TextInput,
   StyleSheet, // CSS-like styles
   Text, // Renders text
-  View // Container component
+  View, // Container component
+  AlertIOS
+
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 import Spinner from "react-native-loading-spinner-overlay";
@@ -45,9 +47,12 @@ export default class Login extends Component {
     }.bind(this)
     AsyncStorage.getItem('userToken').then((value) => {
       if(value !== null){
-        isLoggedIn(value, logAction);
-              // var newUID = this.generateUID()
-              // AsyncStorage.setItem('UID', newUID);
+        if(value !== ''){
+          isLoggedIn(value, logAction);
+        }
+      }
+      else{
+        this.setState({checkingUser:false})
       }
     }).done();
   }
@@ -56,8 +61,15 @@ export default class Login extends Component {
     const { email, password } = this.state;
 
     let callback = function setToken(token){
+      if(token == null){
+        AlertIOS.alert(
+          'Username or password incorrect',
+        );
+        return 0;
+      }
       try {
         AsyncStorage.setItem('userToken', token);
+        AsyncStorage.setItem('username', email);
       } catch (error) {
         console.warn("error al guardar el token");
       }
@@ -86,12 +98,12 @@ export default class Login extends Component {
     else{
       return (
         <View style={styles.container}>
-          <View behavior="padding" style={styles.container}>
+          <View style={styles.container}>
             <View style={styles.logoContainer}>
               <Image style={styles.logo} source={require("../../Images/logoRestaurante.png")} />
               <Text style={styles.title}>PaCompartir</Text>
             </View>
-            <KeyboardAvoidingView style={styles.keyboard}>
+            <View style={styles.keyboard}>
               <TextInput
                 placeholder="Username"
                 placeholderTextColor="rgba(255,255,255,0.7)"
@@ -121,7 +133,7 @@ export default class Login extends Component {
               >
                 <Text style={styles.buttonText}>LOGIN</Text>
               </TouchableOpacity>
-            </KeyboardAvoidingView>
+            </View>
           </View>
           <TouchableOpacity style={styles.button} onPress={() => this.register()}>
             <Text
@@ -135,9 +147,9 @@ export default class Login extends Component {
             <Text
               style={styles.buttonText}
               onPress={() => this.props.navigation.navigate("ForgetPassword.js")}
-              title="Forget Password"
+              title="Forgot Password (Beta)"
             >
-              Forget Password
+              Forgot Password (Beta)
             </Text>
           </TouchableOpacity>
         </View>
@@ -157,12 +169,11 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#3498db"
+    backgroundColor: "#3498db",
+    paddingTop: 25,
   },
   logoContainer: {
     alignItems: "center",
-    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center"
   },

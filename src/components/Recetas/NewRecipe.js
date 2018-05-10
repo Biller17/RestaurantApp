@@ -107,6 +107,7 @@ export default class NewRecipe extends Component {
         <View>
           <FlatList
             data = {this.state.items}
+            keyExtractor={(item, index) => index}
             renderItem={({item}) => (
               <TouchableOpacity  style={{paddingHorizontal: 10}}onPress={() => this.selectIngredient(item)}>
                 <Card
