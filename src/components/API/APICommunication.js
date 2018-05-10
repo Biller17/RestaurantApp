@@ -189,15 +189,38 @@ function newRecipe(name, description, auth, callback, quantityList, idList){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    // console.warn(data);
-    callback(data);
+    if(data.success){
+      // console.warn(data);
+      for(var i = 0; i < quantityList.length; i++){
+        addIngredients(quantityList[i], idList[i], data.item.id, auth);
+      }
+      callback(data);
+    }
+
   })
 }
 
 
-// function addIngredients(){
-//
-// }
+function addIngredients(quantityList, idList, id, auth){
+  const url = 'http://104.236.192.53/restaurantapi/recetas/necesita/' + id;
+  const ingredient = {
+    quantity:quantityList,
+    materiaPrimaId:idList
+  }
+  var request = new Request(url, {
+      method: 'POST',
+      headers: {
+        Authorization: "bearer " + auth,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(ingredient)
+  });
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    console.warn(data);
+  })
+}
 
 function deleteRecipe(id, auth){
   const url = 'http://104.236.192.53/restaurantapi/recetas/' + id;
@@ -211,7 +234,8 @@ function deleteRecipe(id, auth){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    console.warn(data);
+    // console.warn(data);
+    return 0;
     // callback(data.items);
   })
 }
