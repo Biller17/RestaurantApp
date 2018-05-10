@@ -1,27 +1,38 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native';
+import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView, AsyncStorage, FlatList } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
-import Card from './RecipeCard';
-import {deleteRecipe} from '../API/APICommunication.js';
+// import Card from './RecipeCard';
+import {deleteRecipe, getIngredients} from '../API/APICommunication.js';
+import Card from './IngredientCardDetail';
 
 export default class RecipeDetail extends Component {
 
   constructor(props){
 
     super(props);
-    console.warn(this.props.data);
+    // console.warn(this.props.data);
     this.state = {
       name:this.props.data.name,
       category: this.props.data.category,
       cost: this.props.data.cost,
-      id: this.props.data.id
+      id: this.props.data.id,
+      ingredients:[],
     };
   }
-  //
-  // componentDidMount(){
-  //   console.warn(this.props.data);
-  // }
+
+  componentDidMount(){
+    let callback = function updateState(data){
+      this.setState({
+        ingredients: data
+      });
+    }.bind(this);
+    AsyncStorage.getItem('userToken').then((value) => {
+      if(value !== null){
+        getIngredients(value, this.state.id, callback);
+      }
+    }).done();
+  }
 
   newProduct(){
     Actions.pop();
@@ -35,6 +46,33 @@ export default class RecipeDetail extends Component {
     }).done();
     Actions.pop();
   }
+
+
+  renderIngredients(){
+    if(this.state.ingredients.length){
+      return(
+        <View>
+          <FlatList
+            data = {this.state.ingredients}
+            renderItem={({item}) => (
+              <TouchableOpacity  style={{paddingHorizontal: 10}}onPress={() => this.selectIngredient(item)}>
+                <Card
+                  data = {item}
+                />
+            </TouchableOpacity>
+            )}
+          />
+        </View>
+      )
+    }
+    else{
+      return(
+        <View style={styles.logoContainer}>
+          <Image style={styles.logo} source={require("../../Images/foodLoader.gif")} />
+        </View>
+      );
+    }
+  }
   render() {
     return (
       <KeyboardAvoidingView benhavior="padding" style={styles.container}>
@@ -45,9 +83,11 @@ export default class RecipeDetail extends Component {
 
               <Image style={styles.image}source={require('../../Images/placeholder.jpg')}/>
               {/* {<Text style={styles.textDetail}>{this.state.name}</Text>} */}
-              <Text style={styles.textDetailSec}>Categoria: {this.state.category}</Text>
-              <Text style={styles.textDetailSec}>Costo: {this.state.cost}</Text>
+              <Text style={styles.textDetailSec}>Category: {this.state.category}</Text>
+              <Text style={styles.textDetailSec}>Cost: {this.state.cost}</Text>
+              <Text style={styles.textDetailSec}>Ingredients:</Text>
             </View>
+            {this.renderIngredients()}
           </ScrollView>
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={()=> {this.newProduct()}}style={styles.button}>

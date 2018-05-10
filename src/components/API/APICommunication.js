@@ -186,14 +186,14 @@ function registerUser(username, email, password, callback){
    fetch(request)
    .then((resp) => resp.json())
    .then(function(data){
-     console.warn(data);
+     // console.warn(data);
      callback(data.items);
    })
  }
 
 
 function newRecipe(name, description, auth, callback, quantityList, idList){
-  console.warn(auth);
+  // console.warn(auth);
   const recipe = {
 	   name: name,
 	   cost:0,
@@ -264,5 +264,71 @@ function deleteRecipe(id, auth){
   })
 }
 
+function getIngredients(auth, id, callback){
+  const url = 'http://104.236.192.53/restaurantapi/recetas/necesita/' + id;
+  var request = new Request(url, {
+      method: 'GET',
+      headers: {
+        Authorization: "bearer " + auth
+      }
+  });
 
-export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser, getRecipes, newRecipe, deleteRecipe}
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    // console.warn(data.items[0].necesita);
+    callback(data.items[0].necesita);
+  })
+}
+
+
+//*********************************** PLATILLOS *********************************************************
+
+
+function getDishes(callback, auth){
+  const url = 'http://104.236.192.53/restaurantapi/users/elabora';
+  var request = new Request(url, {
+      method: 'GET',
+      headers: {
+        Authorization: "bearer " + auth
+      }
+  });
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    console.warn("data");
+    callback(data.items);
+  })
+}
+
+
+
+function newDish(recipe, auth, description, callback){
+  const url = 'http://104.236.192.53/restaurantapi/users/elabora/' + recipe.id;
+  const obj = {
+    quantity: 1,
+    specifications: description
+  }
+  var request = new Request(url, {
+      method: 'POST',
+      headers: {
+        Authorization: "bearer " + auth,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(obj)
+  });
+
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    console.warn(data);
+    callback(data);
+
+  })
+}
+
+
+
+
+
+export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser, getRecipes, newRecipe, deleteRecipe, getIngredients, getDishes, newDish}

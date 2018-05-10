@@ -50,6 +50,7 @@ export default class Recetas extends Component {
         <View>
           <FlatList
             data = {this.state.items}
+            keyExtractor={(item, index) => index}
             renderItem={({item}) => (
               <Card
                 data = {item}

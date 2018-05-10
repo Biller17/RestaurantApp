@@ -20,17 +20,17 @@ export const Tabs = TabNavigator({
       rippleColor: 'rgb(46, 101, 166)',
       tabs: {
         Almacen: {
-          label: 'Almacén',
+          label: 'Raw Material',
           barBackgroundColor: 'rgb(241,241,241)',
           icon: <Icon size={24} color="rgb(46, 101, 166)" name="assignment" />
         },
         Recetas: {
-          label: 'Recetas',
+          label: 'Recipes',
           barBackgroundColor: 'rgb(241,241,241)',
           icon: <Icon2 size={24} color="rgb(46, 101, 166)" name="food-variant" />
         },
         Platillos: {
-          label: 'Platillos',
+          label: 'Dishes',
           barBackgroundColor: 'rgb(241,241,241)',
           icon: <Icon2 size={24} color="rgb(46, 101, 166)" name="food-fork-drink" />
         }
