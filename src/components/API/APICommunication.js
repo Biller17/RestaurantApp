@@ -6,7 +6,7 @@ function getRawMaterials(callback, auth){
   var request = new Request(url, {
       method: 'GET',
       headers: {
-        Authorization: "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSGVucnlrIiwiaWQiOjEsImlhdCI6MTUyNTc0NTQ3Mn0.OLbyDrZSMa331KzHFdLh2oT0T8lrNIu66auqHEGCuj4"
+        Authorization: "bearer " + auth
       }
   });
 
@@ -146,6 +146,24 @@ function registerUser(username, email, password, callback){
     callback(data)
   })
 }
+ //****************************************************RECETAS*******************************************************+
 
 
-export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser}
+ function getRecipes(callback, auth){
+   const url = 'http://104.236.192.53/restaurantapi/recetas';
+   var request = new Request(url, {
+       method: 'GET',
+       headers: {
+         Authorization: "bearer " + auth
+       }
+   });
+
+   fetch(request)
+   .then((resp) => resp.json())
+   .then(function(data){
+     callback(data.items);
+   })
+ }
+
+
+export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser, getRecipes}

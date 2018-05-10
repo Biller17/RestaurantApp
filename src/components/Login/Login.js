@@ -34,22 +34,22 @@ export default class Login extends Component {
   };
 
   componentDidMount() {
-    // this.setState({
-    //   checkingUser: true,
-    // })
-    // let logAction = function login(){
-    //   this.setState({
-    //     checkingUser: false,
-    //   })
-    //   Actions.nav();
-    // }.bind(this)
-    // AsyncStorage.getItem('userToken').then((value) => {
-    //   if(value !== null){
-    //     isLoggedIn(value, logAction);
-    //           // var newUID = this.generateUID()
-    //           // AsyncStorage.setItem('UID', newUID);
-    //   }
-    // }).done();
+    this.setState({
+      checkingUser: true,
+    })
+    let logAction = function login(){
+      this.setState({
+        checkingUser: false,
+      })
+      Actions.nav();
+    }.bind(this)
+    AsyncStorage.getItem('userToken').then((value) => {
+      if(value !== null){
+        isLoggedIn(value, logAction);
+              // var newUID = this.generateUID()
+              // AsyncStorage.setItem('UID', newUID);
+      }
+    }).done();
   }
 
   async onLoginPress() {

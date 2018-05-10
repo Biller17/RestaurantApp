@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { Text, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, ScrollView, FlatList, AsyncStorage } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Actions} from "react-native-router-flux";
 import Card from './RawMaterialCard';
@@ -34,7 +34,15 @@ export default class Almacen extends Component {
         items: data
       });
     }.bind(this);
-    getRawMaterials(callback, "none");
+    AsyncStorage.getItem('userToken').then((value) => {
+      if(value !== null){
+        console.warn(value);
+        getRawMaterials(callback, value);
+              // var newUID = this.generateUID()
+              // AsyncStorage.setItem('UID', newUID);
+      }
+    }).done();
+
   }
 
   renderItems(){
