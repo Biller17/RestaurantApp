@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput, StyleSheet, View, Image, KeyboardAvoidingView, TouchableOpacity, AlertIOS, ScrollView, AsyncStorage, FlatList} from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
-import {getRawMaterials} from '../API/APICommunication.js';
+import {getRawMaterials, newRecipe} from '../API/APICommunication.js';
 import {Actions} from "react-native-router-flux";
 import Card from './IngredientCard';
 
@@ -18,23 +18,26 @@ export default class NewRecipe extends Component {
       idList: [],
     }
   }
-  newProduct(){
-    const material = {
-      name: this.state.name,
-      category: this.state.category,
-      cost: this.state.cost
-    };
-    let date = new Date(this.state.expirationDate)
-    if(date == null){
-      AlertIOS.alert(
-        'Fecha invalida',
-        'ingrese la fecha como el formato especificado'
-      );
-      return 0;
-    }
-    let milliseconds = date.getTime();
-    newRawMaterial(material, "none", this.state.quantity, milliseconds );
-    Actions.pop();
+  addRecipe(){
+    let callback = function returnMenu(resp){
+      if(resp.success == true){
+        AlertIOS.alert(
+          'Receta generada exitosamente',
+        );
+        Actions.pop();
+      }
+      else{
+        AlertIOS.alert(
+          'Error al generar la receta',
+        );
+        Actions.pop();
+      }
+    }.bind(this);
+    AsyncStorage.getItem('userToken').then((value) => {
+      if(value !== null){
+        newRecipe(this.state.name, this.state.description,value,callback, this.state.quantityList, this.state.idList );
+      }
+    }).done();
   }
 
 
@@ -75,7 +78,6 @@ export default class NewRecipe extends Component {
     var ingredients = this.state.ingredients;
     var quantityList = this.state.quantityList;
     const index = ingredients.indexOf(item.name)
-    console.warn(index);
     if(index >= 0){
       quantityList[index] = quantityList[index] + 1;
       this.setState({
@@ -179,8 +181,8 @@ export default class NewRecipe extends Component {
                 autoCorrect={false}
                 style={styles.input}
               />
-              <Text style={styles.inputTitle}>Precio</Text>
-              <TextInput
+              {/* <Text style={styles.inputTitle}>Precio</Text> */}
+              {/* <TextInput
                 placeholder="100"
                 placeholderTextColor="rgba(255,255,255,0.7)"
                 //Control de botones una ves se complete el campo
@@ -191,7 +193,7 @@ export default class NewRecipe extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 style={styles.input}
-              />
+              /> */}
 
               <Text style={styles.inputTitle}>Descripcion</Text>
               <TextInput
@@ -200,7 +202,7 @@ export default class NewRecipe extends Component {
                 //Control de botones una ves se complete el campo
                 returnKeyType="next"
                 onSubmitEditing={()=>this.passwordInput.focus()}
-                onChangeText={(category) => this.setState({category})}
+                onChangeText={(description) => this.setState({description})}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -217,7 +219,7 @@ export default class NewRecipe extends Component {
             </View>
             <Text style={styles.inputTitle}>Ingredients</Text>
             {this.renderSelectedIngredients()}
-            <TouchableOpacity onPress={() => this.newProduct()}style={styles.buttonContainer}>
+            <TouchableOpacity onPress={() => this.addRecipe()}style={styles.buttonContainer}>
               <Text style={styles.buttonText}>Agregar</Text>
             </TouchableOpacity>
         </View>

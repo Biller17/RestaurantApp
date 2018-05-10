@@ -30,7 +30,8 @@ function deleteRawMaterial(id, auth){
   fetch(request)
   .then((resp) => resp.json())
   .then(function(data){
-    console.warn(data);
+    // console.warn(data);
+    return 0;
     // callback(data.items);
   })
 }
@@ -161,9 +162,59 @@ function registerUser(username, email, password, callback){
    fetch(request)
    .then((resp) => resp.json())
    .then(function(data){
+     console.warn(data);
      callback(data.items);
    })
  }
 
 
-export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser, getRecipes}
+function newRecipe(name, description, auth, callback, quantityList, idList){
+  console.warn(auth);
+  const recipe = {
+	   name: name,
+	   cost:0,
+	   quantity:1,
+     description: description
+  };
+  const url = 'http://104.236.192.53/restaurantapi/recetas/';
+  var request = new Request(url, {
+      method: 'POST',
+      headers: {
+        Authorization: "bearer " + auth,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(recipe)
+  });
+
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    // console.warn(data);
+    callback(data);
+  })
+}
+
+
+// function addIngredients(){
+//
+// }
+
+function deleteRecipe(id, auth){
+  const url = 'http://104.236.192.53/restaurantapi/recetas/' + id;
+  var request = new Request(url, {
+      method: 'DELETE',
+      headers: {
+        Authorization: "bearer " + auth
+      }
+  });
+
+  fetch(request)
+  .then((resp) => resp.json())
+  .then(function(data){
+    console.warn(data);
+    // callback(data.items);
+  })
+}
+
+
+export{getRawMaterials, deleteRawMaterial, newRawMaterial, addRawMaterial, logUser, isLoggedIn, registerUser, getRecipes, newRecipe, deleteRecipe}

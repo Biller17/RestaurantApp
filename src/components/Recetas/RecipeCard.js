@@ -17,7 +17,7 @@ export default class RecipeCard extends Component {
   detail(){
     // Actions.rawDetail();
     // console.warn(this.props.data);
-    Actions.rawDetail({data: this.props.data})
+    Actions.recipeDetail({data: this.props.data})
   }
   render() {
     return (
@@ -31,7 +31,7 @@ export default class RecipeCard extends Component {
           <Text style={styles.details}>Costo: {this.state.cost}</Text>
         </View>
       </TouchableOpacity>
-  );
+    );
   }
 }
 

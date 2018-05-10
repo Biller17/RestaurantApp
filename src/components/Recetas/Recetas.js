@@ -36,7 +36,7 @@ export default class Recetas extends Component {
     }.bind(this);
     AsyncStorage.getItem('userToken').then((value) => {
       if(value !== null){
-        console.warn(value);
+        // console.warn(value);
         getRecipes(callback, value);
               // var newUID = this.generateUID()
               // AsyncStorage.setItem('UID', newUID);
